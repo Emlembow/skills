@@ -1,0 +1,10 @@
+{
+  "name": "ponytail-review-gate",
+  "description": "Adds a reusable Ponytail adversarial review gate for code changes.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Emlembow"
+  },
+  "repository": "https://github.com/Emlembow/skills",
+  "license": "MIT"
+}

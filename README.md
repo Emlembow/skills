@@ -126,6 +126,11 @@ Optimizes existing Claude/Codex skills toward measurable improvement goals using
 
 Ideal when you have a skill and a concrete goal like improving trigger precision, tool-use reliability, task success rate, or validation behavior.
 
+### [Ponytail Review Gate](skills/ponytail-review-gate/)
+Adds a reusable Ponytail adversarial review gate for code changes. The package also includes a standalone Codex plugin at [plugins/ponytail-review-gate](plugins/ponytail-review-gate/) with Ponytail mode, diff review, optional repo audit, hooks, and the mandatory completion gate wrapper.
+
+Use it when you want another project to require a lean-code review before an agent finishes code-writing work.
+
 ## Creating Your Own Skills
 
 ### Quick Start

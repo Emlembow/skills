@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ponytail Adversarial Review"
+  short_description: "Require Ponytail review before completing code changes"
+  default_prompt: "Review code changes with Ponytail and apply corrective fixes before finishing."

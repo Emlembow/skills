@@ -1,0 +1,20 @@
+{
+  "name": "emlembow-skills",
+  "interface": {
+    "displayName": "Emlembow Skills"
+  },
+  "plugins": [
+    {
+      "name": "ponytail-review-gate",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ponytail-review-gate"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

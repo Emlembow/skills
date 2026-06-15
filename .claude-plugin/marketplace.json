@@ -14,6 +14,11 @@
       "name": "skillopt-improve-skill",
       "description": "SkillOpt-style eval, rollout, reflection, patching, and validation for improving skills.",
       "source": "./skills/skillopt-improve-skill"
+    },
+    {
+      "name": "ponytail-review-gate",
+      "description": "Reusable Ponytail minimalism and adversarial review gate for code changes.",
+      "source": "./skills/ponytail-review-gate"
     }
   ]
 }
