@@ -27,29 +27,22 @@
     <path d="M0 54H480" stroke="#334155"/>
     <path d="M24 28h17l7 8h20v12H24z" fill="none" stroke="#67e8f9" stroke-width="2" stroke-linejoin="round"/>
     <text x="82" y="38" fill="#f8fafc" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21" font-weight="700">skills/</text>
-    <text x="370" y="37" fill="#64748b" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">3 focused jobs</text>
+    <text x="370" y="37" fill="#64748b" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">2 focused jobs</text>
 
     <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">
-      <g transform="translate(24 78)">
-        <rect width="432" height="48" rx="10" fill="#162033"/>
-        <rect x="14" y="15" width="14" height="18" rx="2" fill="none" stroke="#67e8f9"/>
-        <path d="M18 20h6M18 25h6M18 30h4" stroke="#67e8f9"/>
-        <text x="42" y="30" fill="#e2e8f0">frontend-aesthetics</text>
-        <text x="352" y="30" fill="#64748b">SKILL.md</text>
+      <g transform="translate(24 89)">
+        <rect width="432" height="64" rx="12" fill="#162033"/>
+        <rect x="16" y="23" width="14" height="18" rx="2" fill="none" stroke="#67e8f9"/>
+        <path d="M20 28h6M20 33h6M20 38h4" stroke="#67e8f9"/>
+        <text x="46" y="39" fill="#e2e8f0">research-loop</text>
+        <text x="352" y="39" fill="#64748b">SKILL.md</text>
       </g>
-      <g transform="translate(24 138)">
-        <rect width="432" height="48" rx="10" fill="#162033"/>
-        <rect x="14" y="15" width="14" height="18" rx="2" fill="none" stroke="#c4b5fd"/>
-        <path d="M18 20h6M18 25h6M18 30h4" stroke="#c4b5fd"/>
-        <text x="42" y="30" fill="#e2e8f0">research-loop</text>
-        <text x="352" y="30" fill="#64748b">SKILL.md</text>
-      </g>
-      <g transform="translate(24 198)">
-        <rect width="432" height="48" rx="10" fill="#162033"/>
-        <rect x="14" y="15" width="14" height="18" rx="2" fill="none" stroke="#67e8f9"/>
-        <path d="M18 20h6M18 25h6M18 30h4" stroke="#67e8f9"/>
-        <text x="42" y="30" fill="#e2e8f0">adversarial-review</text>
-        <text x="352" y="30" fill="#64748b">SKILL.md</text>
+      <g transform="translate(24 169)">
+        <rect width="432" height="64" rx="12" fill="#162033"/>
+        <rect x="16" y="23" width="14" height="18" rx="2" fill="none" stroke="#c4b5fd"/>
+        <path d="M20 28h6M20 33h6M20 38h4" stroke="#c4b5fd"/>
+        <text x="46" y="39" fill="#e2e8f0">adversarial-review</text>
+        <text x="352" y="39" fill="#64748b">SKILL.md</text>
       </g>
     </g>
   </g>

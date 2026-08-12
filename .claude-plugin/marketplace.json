@@ -6,11 +6,6 @@
   },
   "plugins": [
     {
-      "name": "frontend-aesthetics",
-      "description": "Distinctive frontend and web artifact design guidance.",
-      "source": "./skills/frontend-aesthetics"
-    },
-    {
       "name": "adversarial-review",
       "description": "Two independent adversarial approvals for a digest-checked task result.",
       "source": "./skills/adversarial-review"

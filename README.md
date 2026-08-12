@@ -25,7 +25,6 @@ Project scope is the default and is usually the safest choice for a team reposit
 
 | Skill | Best for |
 | --- | --- |
-| [`frontend-aesthetics`](skills/frontend-aesthetics/) | Distinctive web interfaces that keep accessibility, product context, and existing design systems intact |
 | [`research-loop`](skills/research-loop/) | Metric-driven implementation experiments protected by holdout and leakage checks |
 | [`adversarial-review`](skills/adversarial-review/) | Two independent attempts to disprove a versioned, digest-checked result |
 
@@ -36,7 +35,6 @@ Project scope is the default and is usually the safest choice for a team reposit
 Every portable skill can be selected independently:
 
 ```bash
-npx skills add Emlembow/skills --skill frontend-aesthetics
 npx skills add Emlembow/skills --skill research-loop
 npx skills add Emlembow/skills --skill adversarial-review
 ```
@@ -44,8 +42,8 @@ npx skills add Emlembow/skills --skill adversarial-review
 To install a reviewed skill for a specific agent at user scope, be explicit:
 
 ```bash
-npx skills add Emlembow/skills --skill frontend-aesthetics --agent codex --global --yes
-npx skills add Emlembow/skills --skill frontend-aesthetics --agent claude-code --global --yes
+npx skills add Emlembow/skills --skill research-loop --agent codex --global --yes
+npx skills add Emlembow/skills --skill research-loop --agent claude-code --global --yes
 ```
 
 The CLI recommends symlink installation. Use `--copy` only when the target environment cannot use symlinks. Update project-scoped skills with `npx skills update -p`, or user-scoped skills with `npx skills update -g`.

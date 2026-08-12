@@ -1,4 +1,0 @@
-interface:
-  display_name: "Frontend Aesthetics"
-  short_description: "Design distinctive, polished web interfaces"
-  default_prompt: "Use $frontend-aesthetics to design a distinctive, polished interface for this project."
