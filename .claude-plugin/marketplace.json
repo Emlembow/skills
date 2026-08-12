@@ -1,6 +1,6 @@
 {
   "name": "emlembow-skills",
-  "description": "Portable Agent Skills plus the full Ponytail Review Gate plugin.",
+  "description": "Portable Agent Skills for Codex, Claude Code, and other compatible agents.",
   "owner": {
     "name": "Emlembow"
   },
@@ -16,9 +16,9 @@
       "source": "./skills/skillopt-improve-skill"
     },
     {
-      "name": "ponytail-review-gate",
-      "description": "Reusable Ponytail minimalism and adversarial review gate for code changes.",
-      "source": "./plugins/ponytail-review-gate"
+      "name": "adversarial-review",
+      "description": "Two independent adversarial approvals for an immutable task result.",
+      "source": "./skills/adversarial-review"
     }
   ]
 }
