@@ -17,7 +17,7 @@
     },
     {
       "name": "adversarial-review",
-      "description": "Two independent adversarial approvals for an immutable task result.",
+      "description": "Two independent adversarial approvals for a digest-checked task result.",
       "source": "./skills/adversarial-review"
     }
   ]
