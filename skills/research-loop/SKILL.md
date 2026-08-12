@@ -1,6 +1,6 @@
 ---
 name: research-loop
-description: Run autonomous, metric-driven experiments on a version-controlled implementation against a fixed evaluation harness. Use when the user asks to improve eval pass rate, benchmark score, prompt or policy quality, performance, cost, or another measurable outcome through repeated hypothesis, change, evaluate, keep-or-discard cycles. Protect generalization with holdout gates and reject hardcoded cases, benchmark leakage, scenario-specific prompt patches, or harness gaming. Do not use for one-off debugging, ordinary test fixing, or improving an Agent Skill artifact itself; use $skillopt-improve-skill for skill optimization.
+description: Run autonomous, metric-driven experiments on a version-controlled implementation against a fixed evaluation harness. Use when the user asks to improve eval pass rate, benchmark score, prompt or policy quality, performance, cost, or another measurable outcome through repeated hypothesis, change, evaluate, keep-or-discard cycles. Protect generalization with holdout gates and reject hardcoded cases, benchmark leakage, scenario-specific prompt patches, or harness gaming. Do not use for one-off debugging, ordinary test fixing, or Agent Skill artifact optimization.
 ---
 
 # Research Loop

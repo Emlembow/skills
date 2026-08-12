@@ -1,4 +1,0 @@
-interface:
-  display_name: "SkillOpt Improve Skill"
-  short_description: "Evaluate and improve an existing skill"
-  default_prompt: "Use $skillopt-improve-skill to evaluate and improve this skill against a measurable goal."

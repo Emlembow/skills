@@ -11,11 +11,6 @@
       "source": "./skills/frontend-aesthetics"
     },
     {
-      "name": "skillopt-improve-skill",
-      "description": "SkillOpt-style eval, rollout, reflection, patching, and validation for improving skills.",
-      "source": "./skills/skillopt-improve-skill"
-    },
-    {
       "name": "adversarial-review",
       "description": "Two independent adversarial approvals for a digest-checked task result.",
       "source": "./skills/adversarial-review"
