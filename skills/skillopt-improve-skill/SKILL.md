@@ -1,6 +1,6 @@
 ---
 name: skillopt-improve-skill
-description: Optimize, evaluate, or revise an existing Codex skill using Microsoft SkillOpt-style methodology. Use when the user provides a skill, SKILL.md, or skill folder plus a goal for improvement; asks to make a skill self-improve, evolve, train, validate, forward-test, run SkillOpt, design eval cases, or produce a better skill artifact through rollout, reflection, edit selection, update, and validation gating.
+description: Evaluate and improve an existing Agent Skill against a measurable goal using SkillOpt-style rollouts, reflection, bounded edits, and validation gates. Use when the user provides a skill, SKILL.md, or skill folder and asks to improve triggering, reliability, task success, tool use, evaluation behavior, or the skill artifact itself. Do not use to create an unrelated skill from scratch.
 ---
 
 # SkillOpt Improve Skill
@@ -11,7 +11,7 @@ Improve an existing skill toward a concrete objective using SkillOpt's disciplin
 
 Do the work end to end when possible. If the user gives only a skill and a goal, create an evaluation plan, run a lightweight local optimization loop, and leave a clear improved artifact plus optimization notes. Ask only when the goal cannot be scored or the target skill cannot be found.
 
-When running bundled scripts, use the directory containing this `SKILL.md`. In Claude Code, prefer `${CLAUDE_SKILL_DIR}`. In other environments, locate the installed or unpacked skill directory first.
+Resolve `<skill-dir>` to the directory containing this `SKILL.md` before running bundled scripts.
 
 ## Resource Map
 
@@ -39,7 +39,7 @@ When running bundled scripts, use the directory containing this `SKILL.md`. In C
    - Run:
 
 ```bash
-python3 "${CLAUDE_SKILL_DIR}/scripts/skillopt_workspace.py" init --skill /path/to/SKILL.md --goal "specific improvement goal" --out-dir /path/to/workspace
+python3 "<skill-dir>/scripts/skillopt_workspace.py" init --skill /path/to/SKILL.md --goal "specific improvement goal" --out-dir /path/to/workspace
 ```
 
    - Add eval cases with `--case "id|prompt|criteria"` or `--cases-jsonl cases.jsonl` when available.
@@ -74,7 +74,7 @@ python3 "${CLAUDE_SKILL_DIR}/scripts/skillopt_workspace.py" init --skill /path/t
    - Apply the selected patch with:
 
 ```bash
-python3 "${CLAUDE_SKILL_DIR}/scripts/skillopt_workspace.py" apply-patch --skill current.md --patch patch.json --out candidate.md --report patch_report.json
+python3 "<skill-dir>/scripts/skillopt_workspace.py" apply-patch --skill current.md --patch patch.json --out candidate.md --report patch_report.json
 ```
 
 8. Gate the candidate.
@@ -84,7 +84,7 @@ python3 "${CLAUDE_SKILL_DIR}/scripts/skillopt_workspace.py" apply-patch --skill 
    - Compare result files with:
 
 ```bash
-python3 "${CLAUDE_SKILL_DIR}/scripts/skillopt_workspace.py" compare --baseline baseline_results.jsonl --candidate candidate_results.jsonl --report gate_report.json
+python3 "<skill-dir>/scripts/skillopt_workspace.py" compare --baseline baseline_results.jsonl --candidate candidate_results.jsonl --report gate_report.json
 ```
 
 9. Iterate like SkillOpt.

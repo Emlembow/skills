@@ -1,6 +1,6 @@
 {
   "name": "emlembow-skills",
-  "description": "A marketplace of custom Claude Code skills for frontend design and skill optimization workflows.",
+  "description": "Portable Agent Skills plus the full Ponytail Review Gate plugin.",
   "owner": {
     "name": "Emlembow"
   },
@@ -18,7 +18,7 @@
     {
       "name": "ponytail-review-gate",
       "description": "Reusable Ponytail minimalism and adversarial review gate for code changes.",
-      "source": "./skills/ponytail-review-gate"
+      "source": "./plugins/ponytail-review-gate"
     }
   ]
 }

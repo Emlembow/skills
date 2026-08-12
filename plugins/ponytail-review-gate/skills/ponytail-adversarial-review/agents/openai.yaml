@@ -1,4 +1,4 @@
 interface:
   display_name: "Ponytail Adversarial Review"
-  short_description: "Require Ponytail review before completing code changes"
-  default_prompt: "Review code changes with Ponytail and apply corrective fixes before finishing."
+  short_description: "Challenge code changes before completion"
+  default_prompt: "Use $ponytail-adversarial-review to challenge this diff, apply accepted simplifications, and verify it."

@@ -1,13 +1,6 @@
 ---
 name: ponytail-review
-description: >
-  Code review focused exclusively on over-engineering. Finds what to delete:
-  reinvented standard library, unneeded dependencies, speculative abstractions,
-  dead flexibility. One line per finding: location, what to cut, what replaces
-  it. Use when the user says "review for over-engineering", "what can we
-  delete", "is this over-engineered", "simplify review", or invokes
-  /ponytail-review. Complements correctness-focused review — this one only
-  hunts complexity.
+description: Review changed code exclusively for avoidable complexity such as dead flexibility, unnecessary dependencies, hand-rolled standard behavior, and speculative abstractions. Use when the user invokes Ponytail Review or asks what can be deleted, simplified, or de-engineered in a diff. Do not use as a substitute for correctness, security, or performance review.
 ---
 
 Review diffs for unnecessary complexity. One line per finding: location, what
@@ -53,4 +46,4 @@ Complexity only — correctness bugs, security holes, and performance go to a
 normal review pass, not this one. A single smoke test or `assert`-based
 self-check is the ponytail minimum, not bloat — never flag it for deletion.
 Does not apply the fixes, only lists them.
-"stop ponytail-review" or "normal mode": revert to verbose review style.
+Treat this as a one-shot review unless the user asks to continue.

@@ -1,75 +1,35 @@
 ---
 name: your-skill-name
-description: Briefly describe what this skill does and when Claude should use it.
+description: State what this skill does, the prompts or contexts that should trigger it, and any nearby tasks that should not trigger it.
 ---
 
-# [Skill Name]
+# Skill Name
 
-## Description
-Briefly describe what this skill does and when Claude should use it.
+State the concrete outcome this skill must produce.
 
-## When to Use
-Specify the conditions or scenarios when this skill should be activated:
-- List specific trigger conditions
-- Mention relevant keywords or contexts
-- Define the scope of problems this skill solves
+## Workflow
 
-## Instructions
+1. Identify the required inputs and inspect only the relevant context.
+2. Perform the task in explicit, imperative steps.
+3. Use bundled resources only when their stated condition applies.
+4. Verify the result with the smallest check that can catch a meaningful failure.
+5. Report the output, verification result, and any remaining limitation.
 
-Provide clear, step-by-step instructions for Claude to follow:
+## Resources
 
-1. **Step 1**: Describe the first action to take
-2. **Step 2**: Describe the next action
-3. **Step 3**: Continue with detailed steps
+- Read `references/example.md` only when the task needs detailed domain guidance.
+- Run `scripts/example.py` only when deterministic processing is required.
+- Reuse files from `assets/` when they are intended to appear in the output.
 
-## Requirements
+Delete this section and any unused resource directories when the skill needs no bundled resources.
 
-- List any dependencies or prerequisites
-- Mention required tools or access
-- Note any environment setup needed
+## Constraints
 
-## Examples
+- Preserve explicit user requirements and existing project conventions.
+- Ask for input only when a missing choice would materially change the result.
+- Keep optional detail out of `SKILL.md`; link directly to one-level-deep references.
+- Do not add scripts for behavior that concise instructions can handle reliably.
 
-### Example 1: [Use Case Name]
+## Verification
 
-**Input:**
-```
-Example user request or input
-```
-
-**Expected Behavior:**
-```
-How Claude should respond or what actions to take
-```
-
-### Example 2: [Another Use Case]
-
-**Input:**
-```
-Another example request
-```
-
-**Expected Behavior:**
-```
-Expected response or actions
-```
-
-## Output Format
-
-Describe how results should be presented:
-- Format specifications
-- Structure requirements
-- Any special formatting needs
-
-## Error Handling
-
-Explain how to handle common errors or edge cases:
-- What to do if X fails
-- How to handle missing information
-- Fallback strategies
-
-## Notes
-
-- Additional tips or considerations
-- Limitations of this skill
-- Related skills that work well together
+Define the checks that must pass before the skill can report completion.

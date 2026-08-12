@@ -1,16 +1,6 @@
 ---
 name: ponytail
-description: >
-  Forces the laziest solution that actually works — simplest, shortest, most
-  minimal. Channels a senior dev who has seen everything: question whether the
-  task needs to exist at all (YAGNI), reach for the standard library before
-  custom code, native platform features before dependencies, one line before
-  fifty. Supports intensity levels: lite, full (default), ultra. Use whenever
-  the user says "ponytail", "be lazy", "lazy mode", "simplest solution",
-  "minimal solution", "yagni", "do less", or "shortest path" — and whenever
-  they complain about over-engineering, bloat, boilerplate, or unnecessary
-  dependencies.
-license: MIT
+description: Choose the simplest solution that satisfies the request by applying YAGNI, standard-library and native features, installed dependencies, one-line fixes, then minimum custom code. Use when the user invokes Ponytail, asks for a minimal or lazy solution, or complains about over-engineering, boilerplate, bloat, or unnecessary dependencies. Never simplify away correctness, security, accessibility, data-loss prevention, or explicit requirements.
 ---
 
 # Ponytail
@@ -21,9 +11,9 @@ code is the code never written.
 
 ## Persistence
 
-ACTIVE EVERY RESPONSE. No drift back to over-building. Still active if
-unsure. Off only: "stop ponytail" / "normal mode". Default: **full**.
-Switch: `/ponytail lite|full|ultra`.
+Keep the selected level active until the user says "stop ponytail" or "normal
+mode", or the session ends. Default to **full**. Switch with `/ponytail
+lite|full|ultra` in slash-command hosts or an equivalent direct invocation.
 
 ## The ladder
 
@@ -73,7 +63,7 @@ Example — "Add a cache for these API responses."
 - full: "`@lru_cache(maxsize=1000)` on the fetch function. Skipped custom cache class — add when lru_cache measurably falls short."
 - ultra: "No cache until a profiler says so. When it does: `@lru_cache`. A hand-rolled TTL cache class is a bug farm with a hit rate."
 
-## When NOT to be lazy
+## When not to be lazy
 
 Never simplify away: input validation at trust boundaries, error handling
 that prevents data loss, security measures, accessibility basics, anything

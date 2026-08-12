@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Name"
+  short_description: "Describe the skill in 25 to 64 characters"
+  default_prompt: "Use $your-skill-name to complete this workflow."

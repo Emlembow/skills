@@ -1,97 +1,43 @@
-# Contributing to Claude Skills Collection
+# Contributing
 
-Thank you for your interest in contributing! This document provides guidelines for adding skills to this collection.
+Contributions should remain portable across agents unless a skill or plugin explicitly declares a narrower scope.
 
-## How to Contribute
+## Add or update a skill
 
-### Adding a New Skill
+1. Create `skills/<skill-name>/SKILL.md` with `$skill-creator` or `npx skills init <skill-name>`.
+2. Use a lowercase, hyphenated directory name of at most 64 characters and make the frontmatter `name` match it exactly.
+3. Keep frontmatter to `name` and `description` for maximum portability. Make the description state both what the skill does and when it should or should not trigger.
+4. Write the body as concise imperative instructions. Keep it under 500 lines and preferably under 5,000 tokens.
+5. Put optional detail in focused `references/`, deterministic helpers in `scripts/`, and output resources in `assets/`. Link resources directly from `SKILL.md`; avoid deep reference chains.
+6. Add `agents/openai.yaml` with quoted strings for `display_name`, a 25-64 character `short_description`, and a `default_prompt` that explicitly mentions `$skill-name`.
+7. Do not add a skill-local README, changelog, or installation guide. Put human-facing collection documentation in the root README.
+8. If the skill includes scripts, make dependencies and failure messages clear and run every new or changed script.
+9. Update the root README and any marketplace entry that distributes the skill.
+10. Run `npm run validate`.
 
-1. **Fork the Repository**
-   ```bash
-   git clone https://github.com/Emlembow/claude-skills.git
-   cd claude-skills
-   ```
+## Trigger and workflow checks
 
-2. **Create a New Skill Folder**
-   ```bash
-   mkdir -p skills/your-skill-name
-   cd skills/your-skill-name
-   ```
+Test at least these cases before opening a pull request:
 
-3. **Use the Template**
-   - Copy `templates/skill-template/SKILL.md` to `SKILL.md` in your skill folder
-   - Copy `templates/skill-template/README.md` if you want human-readable docs
-   - Add `.claude-plugin/plugin.json` so the skill is installable through Claude Code marketplaces
-   - Customize all files for your skill
+- A direct invocation of the skill.
+- A prompt that should trigger the skill implicitly.
+- A nearby prompt that should not trigger it.
+- A realistic success path.
+- A missing-input, tool-failure, or edge-case path when relevant.
 
-4. **Follow Best Practices**
-   - Keep skills focused on specific tasks
-   - Write clear, actionable instructions
-   - Include examples of usage
-   - Test thoroughly before submitting
-   - Document any dependencies
+Record the prompts and outcomes in the pull request description rather than adding test notes inside the skill.
 
-5. **Update Marketplace Files**
-   - Add your skill to `.claude-plugin/marketplace.json`
-   - Run `npm run validate`
+## Plugin changes
 
-6. **Update Main README**
-   - Add your skill to the "Available Skills" section
-   - Include a brief description and link to the skill folder
+Keep plugin manifests, marketplace entries, and bundled skill paths in sync. The full Ponytail plugin must remain valid from both:
 
-7. **Submit a Pull Request**
-   - Create a descriptive PR title (e.g., "Add [skill-name] skill")
-   - Describe what the skill does and why it's useful
-   - Include testing results or examples
+- `.agents/plugins/marketplace.json` for Codex.
+- `.claude-plugin/marketplace.json` for Claude Code.
 
-## Skill Quality Guidelines
+Do not claim a capability that the target host does not load. Keep host-specific behavior inside the corresponding plugin surface, while leaving the top-level `skills/` collection portable.
 
-### Required Elements
+## Pull requests
 
-Every skill must have:
-- [ ] Clear description of purpose
-- [ ] When to use / trigger conditions
-- [ ] Valid `SKILL.md` YAML frontmatter
-- [ ] `.claude-plugin/plugin.json` manifest
-- [ ] `.claude-plugin/marketplace.json` entry
-- [ ] `npm run validate` passes
-- [ ] Step-by-step instructions
-- [ ] At least one example
-- [ ] Error handling guidance
+Explain the user-visible behavior, list validation commands and results, and call out any new script, dependency, network access, or credential requirement.
 
-### Optional but Recommended
-- [ ] README.md for human readers
-- [ ] Additional resources or scripts
-- [ ] Links to related documentation
-- [ ] Testing instructions
-
-### Writing Guidelines
-
-**Do:**
-- Write precise, actionable instructions
-- Use clear, simple language
-- Include concrete examples
-- Explain the reasoning behind approaches
-- Document edge cases and limitations
-
-**Don't:**
-- Make instructions vague or ambiguous
-- Assume context that isn't provided
-- Skip error handling
-- Forget to test the skill
-- Overlook dependencies
-
-## Code of Conduct
-
-- Be respectful and constructive
-- Focus on helping the community
-- Accept feedback graciously
-- Give credit where due
-
-## Questions?
-
-Feel free to open an issue if you have questions about contributing!
-
-## License
-
-By contributing, you agree that your contributions will be licensed under the MIT License.
+By contributing, you agree that your changes are licensed under the repository's MIT license.

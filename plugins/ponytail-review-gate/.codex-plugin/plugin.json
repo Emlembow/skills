@@ -1,6 +1,6 @@
 {
   "name": "ponytail-review-gate",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "Portable Ponytail mode, over-engineering review, repo audit, and mandatory adversarial review gate for Codex projects.",
   "author": {
     "name": "Emlembow"
@@ -16,7 +16,7 @@
     "longDescription": "Bundles Ponytail mode, Ponytail review, Ponytail audit, and a project-ready adversarial completion gate for Codex code changes.",
     "developerName": "Emlembow",
     "category": "Productivity",
-    "capabilities": ["Instructions", "Lifecycle hooks"],
+    "capabilities": ["Instructions", "Code review"],
     "websiteURL": "https://github.com/Emlembow/skills",
     "defaultPrompt": [
       "Use Ponytail mode for this task.",

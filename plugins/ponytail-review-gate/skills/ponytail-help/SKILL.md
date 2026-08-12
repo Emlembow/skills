@@ -1,9 +1,6 @@
 ---
 name: ponytail-help
-description: >
-  Quick-reference card for all ponytail modes, skills, and commands.
-  One-shot display, not a persistent mode. Trigger: /ponytail-help,
-  "ponytail help", "what ponytail commands", "how do I use ponytail".
+description: Show a one-shot quick-reference card for Ponytail levels, skills, commands, deactivation, and default-mode configuration. Use when the user invokes Ponytail Help or asks how to use or configure Ponytail. Do not change or persist the active mode.
 ---
 
 # Ponytail Help
@@ -29,9 +26,8 @@ Level sticks until changed or session end.
 | **ponytail-review** | `/ponytail-review` | Over-engineering review: `L42: yagni: factory, one product. Inline.` |
 | **ponytail-help** | `/ponytail-help` | This card. |
 
-Codex uses `@ponytail`, `@ponytail-review`, and `@ponytail-help`; Claude Code
-and OpenCode use the slash-command forms above (OpenCode ships `/ponytail` and
-`/ponytail-review`).
+Codex uses `$ponytail`, `$ponytail-review`, and `$ponytail-help`. Claude Code
+and other slash-command hosts use the forms above.
 
 ## Deactivate
 

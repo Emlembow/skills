@@ -19,10 +19,9 @@ Thumbs.db
 .env.local
 .env.*.local
 
-# Node (if using JavaScript tools)
+# Node
 node_modules/
-package-lock.json
-yarn.lock
+# Commit lockfiles when dependencies are added.
 
 # Python (if using Python tools)
 __pycache__/

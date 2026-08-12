@@ -1,27 +1,29 @@
 # Ponytail Review Gate
 
-Portable Codex plugin that bundles:
+Portable Codex and Claude Code plugin that bundles:
 
 - `ponytail`: lazy senior developer mode.
 - `ponytail-review`: diff-only over-engineering review.
 - `ponytail-audit`: optional whole-repo over-engineering audit.
 - `ponytail-adversarial-review`: mandatory completion gate for code-writing tasks.
 
-## Install
+## Install in Codex
 
-Clone or install `Emlembow/skills`, then add the Codex marketplace at:
-
-```text
-.agents/plugins/marketplace.json
+```bash
+codex plugin marketplace add Emlembow/skills
+codex plugin add ponytail-review-gate@emlembow-skills
 ```
 
-Install the plugin named:
+Start a new task after installation so Codex loads the bundled skills.
 
-```text
-ponytail-review-gate
+## Install in Claude Code
+
+```bash
+claude plugin marketplace add Emlembow/skills
+claude plugin install ponytail-review-gate@emlembow-skills
 ```
 
-## Add The Gate To A Repo
+## Add the gate to a repository
 
 Add this to that repo's `AGENTS.md`:
 

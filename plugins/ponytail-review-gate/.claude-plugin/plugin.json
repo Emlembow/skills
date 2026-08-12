@@ -1,0 +1,11 @@
+{
+  "name": "ponytail-review-gate",
+  "version": "4.4.0",
+  "description": "Portable Ponytail mode, over-engineering review, repo audit, and mandatory adversarial review gate.",
+  "author": {
+    "name": "Emlembow"
+  },
+  "repository": "https://github.com/Emlembow/skills",
+  "homepage": "https://github.com/Emlembow/skills/tree/main/plugins/ponytail-review-gate",
+  "license": "MIT"
+}

@@ -1,186 +1,105 @@
-# Claude Skills Collection
+# Emlembow Skills
 
-A curated collection of custom skills for Claude AI. Skills are composable, portable extensions that enhance Claude's capabilities for specific tasks.
+Portable [Agent Skills](https://agentskills.io/) for Codex, Claude Code, and other compatible coding agents. The repository also publishes a full Ponytail Review Gate plugin for Codex and Claude Code.
 
-## What Are Skills?
+## Install with `npx skills`
 
-Skills are folders containing instructions, scripts, and resources that Claude can load when needed. They make Claude more powerful by providing:
-
-- **Composable** - Stack together automatically; Claude identifies and coordinates needed skills
-- **Portable** - Use the same format across Claude apps, Claude Code, and API
-- **Efficient** - Load only what's necessary when needed
-- **Powerful** - Can include executable code for reliable task execution
-
-Learn more: [Anthropic Skills Announcement](https://www.anthropic.com/news/skills)
-
-## Repository Structure
-
-```
-claude-skills/
-├── .claude-plugin/
-│   └── marketplace.json     # Claude Code plugin marketplace catalog
-├── skills/           # Individual skill folders
-│   ├── skill-name/
-│   │   ├── .claude-plugin/
-│   │   │   └── plugin.json  # Claude Code plugin manifest
-│   │   ├── SKILL.md         # Skill definition and instructions
-│   │   └── ...       # Additional resources/scripts
-├── templates/        # Templates for creating new skills
-└── README.md
-```
-
-Each skill folder is both an Agent Skills package (`SKILL.md`) and a single-skill Claude Code plugin (`.claude-plugin/plugin.json`). The root marketplace catalog lets Claude Code install skills through `/plugin marketplace add`.
-
-## Using These Skills
-
-### With `npx skills`
-
-The easiest cross-agent install path is the `skills` CLI:
+Inspect the available portable skills before installing:
 
 ```bash
-# List available skills
-npx skills@latest add Emlembow/claude-skills --list
-
-# Install a specific skill for Claude Code
-npx skills@latest add Emlembow/claude-skills --skill skillopt-improve-skill --agent claude-code --global
-
-# Install all skills for all detected agents
-npx skills@latest add Emlembow/claude-skills --all
+npx skills add Emlembow/skills --list
 ```
 
-### In Claude Code Via Plugin Marketplace
-
-Add this repository as a Claude Code marketplace:
+Install one skill into the current project:
 
 ```bash
-claude plugin marketplace add Emlembow/claude-skills
+npx skills add Emlembow/skills --skill frontend-aesthetics
+npx skills add Emlembow/skills --skill skillopt-improve-skill
+npx skills add Emlembow/skills --skill ponytail-review-gate
 ```
 
-Then install individual skills as namespaced plugins:
+Project scope is the default and is usually the safest choice for team repositories. To install a reviewed skill for a specific agent at user scope, be explicit:
 
 ```bash
-claude plugin install frontend-aesthetics@emlembow-skills
-claude plugin install skillopt-improve-skill@emlembow-skills
+npx skills add Emlembow/skills --skill frontend-aesthetics --agent codex --global --yes
+npx skills add Emlembow/skills --skill frontend-aesthetics --agent claude-code --global --yes
 ```
 
-Inside an interactive Claude Code session, the equivalent commands are:
+Use `--copy` only when the target environment cannot use the CLI's recommended symlink installation. Update installed skills with `npx skills update -p` for project scope or `npx skills update -g` for user scope.
 
-```text
-/plugin marketplace add Emlembow/claude-skills
-/plugin install frontend-aesthetics@emlembow-skills
-/plugin install skillopt-improve-skill@emlembow-skills
-```
+Skills can contain executable scripts. Review a skill and its bundled resources before granting it access to sensitive repositories, credentials, or external systems. The CLI supports `DISABLE_TELEMETRY=1` and `DO_NOT_TRACK=1` when telemetry must be disabled.
 
-For local development, load a skill folder directly as a plugin:
+## Primary portable skills
+
+### [Frontend Aesthetics](skills/frontend-aesthetics/)
+
+Designs distinctive, responsive web interfaces while preserving product context, accessibility, and an existing design system when one is present.
+
+### [SkillOpt Improve Skill](skills/skillopt-improve-skill/)
+
+Evaluates and improves an existing skill against a measurable objective using rollouts, bounded edits, and validation gates.
+
+### [Ponytail Review Gate](skills/ponytail-review-gate/)
+
+Adds or runs a lean-code completion gate. The portable skill works on its own; the full plugin below adds the companion Ponytail modes and review skills.
+
+The repository also exposes the plugin's five companion `SKILL.md` entries through `npx skills add Emlembow/skills --list`, so they can be installed individually without plugin-specific integration.
+
+## Full Ponytail plugin
+
+The plugin at [`plugins/ponytail-review-gate`](plugins/ponytail-review-gate/) bundles Ponytail mode, diff review, whole-repository audit, help, and the adversarial completion gate.
+
+### Codex
 
 ```bash
-claude --plugin-dir ./skills/skillopt-improve-skill
+codex plugin marketplace add Emlembow/skills
+codex plugin add ponytail-review-gate@emlembow-skills
 ```
 
-### Repo Management
+Start a new task after installation so Codex loads the plugin's skills.
 
-Validate the marketplace and npx discovery paths:
+### Claude Code
+
+```bash
+claude plugin marketplace add Emlembow/skills
+claude plugin install ponytail-review-gate@emlembow-skills
+```
+
+To install only the plugin's five portable skills through the open `skills` CLI, without plugin-specific integration:
+
+```bash
+npx skills add https://github.com/Emlembow/skills/tree/main/plugins/ponytail-review-gate --skill '*' --agent codex
+```
+
+## Create or contribute a skill
+
+Use the creator built into your agent when available (`$skill-creator` in Codex), or initialize a portable skill with:
+
+```bash
+npx skills init my-skill
+```
+
+Keep `SKILL.md` focused on one job, put trigger conditions in the frontmatter `description`, write imperative steps with explicit inputs and outputs, and move optional detail into one-level-deep `references/`. Add `agents/openai.yaml` for Codex presentation metadata.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the repository requirements.
+
+## Validate
+
+The automated checks pin tool versions for reproducibility even though end-user install examples follow the official unversioned `npx skills` form.
 
 ```bash
 npm run validate
 ```
 
-Or run individual checks:
+This checks repository structure, skill metadata, portable discovery for both skill collections, and the Claude marketplace. Pull requests and pushes to `main` run the same validation in GitHub Actions.
 
-```bash
-npm run skills:list
-npm run validate:marketplace
-npm run validate:plugins
-```
+## Sources
 
-### In Claude Apps (Pro, Max, Team, Enterprise)
-
-1. Custom skills can be imported through the Claude interface
-2. Follow the [Claude user guide](https://support.anthropic.com/) for detailed instructions
-
-### Via API
-
-Use the `/v1/skills` endpoint to add skills to your API requests. See [API documentation](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview) for details.
-
-## Available Skills
-
-### [Frontend Aesthetics](skills/frontend-aesthetics/)
-Ensures websites and web applications are built with distinctive, creative aesthetics that avoid generic "AI slop" design patterns. This skill guides Claude to create intentional, context-specific designs with:
-
-- **Unique typography** - Distinctive font pairings beyond overused defaults
-- **Cohesive color themes** - Mood-driven palettes inspired by IDE themes, art movements, and nature
-- **Orchestrated animations** - Meaningful motion that enhances the experience
-- **Atmospheric backgrounds** - Layered gradients, patterns, and contextual effects
-- **Strategic layouts** - Breaking the grid when appropriate for visual impact
-
-Perfect for any HTML, React, or web-based artifact creation.
-
-### [SkillOpt Improve Skill](skills/skillopt-improve-skill/)
-Optimizes existing Claude/Codex skills toward measurable improvement goals using Microsoft SkillOpt-style methodology. This skill helps Claude:
-
-- **Design evals** - Turn an improvement goal into train/validation cases and scoring criteria
-- **Run rollouts** - Capture baseline and candidate behavior with structured result files
-- **Reflect on evidence** - Propose bounded, general SkillOpt-style edit patches
-- **Gate updates** - Accept only candidates that improve validation results without regressions
-- **Use SkillOpt proper** - Decide when to run Microsoft SkillOpt or a lightweight local loop
-
-Ideal when you have a skill and a concrete goal like improving trigger precision, tool-use reliability, task success rate, or validation behavior.
-
-### [Ponytail Review Gate](skills/ponytail-review-gate/)
-Adds a reusable Ponytail adversarial review gate for code changes. The package also includes a standalone Codex plugin at [plugins/ponytail-review-gate](plugins/ponytail-review-gate/) with Ponytail mode, diff review, optional repo audit, hooks, and the mandatory completion gate wrapper.
-
-Use it when you want another project to require a lean-code review before an agent finishes code-writing work.
-
-## Creating Your Own Skills
-
-### Quick Start
-
-1. Copy the template from `templates/skill-template/`
-2. Customize the `SKILL.md` file with your instructions
-3. Add a `.claude-plugin/plugin.json` manifest so Claude Code can install it as a plugin
-4. Add any necessary scripts or resources
-5. Test with `npm run validate`
-6. Update `.claude-plugin/marketplace.json`
-7. (Optional) Submit a PR to share with the community
-
-### Skill Structure
-
-Each skill folder should contain:
-
-- `SKILL.md` - Main skill definition with instructions for Claude
-- `.claude-plugin/plugin.json` - Claude Code plugin manifest
-- `README.md` (optional) - Human-readable documentation
-- Scripts/resources (optional) - Any code or files the skill needs
-
-### Best Practices
-
-- **Clear instructions**: Write precise, actionable instructions for Claude
-- **Scope**: Keep skills focused on specific tasks
-- **Examples**: Include examples of when/how to use the skill
-- **Testing**: Test thoroughly before sharing
-- **Documentation**: Document dependencies and requirements
-- **Modularity**: Design skills to work independently or compose with others
-- **Marketplace compatibility**: Keep `.claude-plugin/marketplace.json` in sync with `skills/`
-
-## Contributing
-
-Contributions are welcome! To add a skill:
-
-1. Fork this repository
-2. Create a new skill folder under `skills/`
-3. Follow the structure and best practices above
-4. Submit a pull request with a description of your skill
-
-## Resources
-
-- [Anthropic Skills Documentation](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview)
-- [Official Anthropic Skills Examples](https://github.com/anthropics/skills)
-- [Claude Code Documentation](https://docs.claude.com/en/docs/claude-code)
+- [OpenAI: Build skills](https://developers.openai.com/codex/skills/)
+- [Agent Skills specification](https://agentskills.io/specification)
+- [`skills` CLI reference](https://www.skills.sh/docs/cli)
+- [Claude Code skills](https://code.claude.com/docs/en/slash-commands)
 
 ## License
 
-MIT License - feel free to use and modify these skills for your needs.
-
----
-
-**Note**: This is a personal collection of skills. For official Anthropic skills, visit [github.com/anthropics/skills](https://github.com/anthropics/skills).
+MIT. See [LICENSE](LICENSE).

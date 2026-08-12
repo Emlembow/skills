@@ -1,12 +1,16 @@
 {
-  "name": "claude-skills",
+  "name": "emlembow-skills",
   "version": "1.0.0",
   "private": true,
-  "description": "Marketplace-ready Claude skills collection.",
+  "description": "Portable Agent Skills for Codex, Claude Code, and other compatible agents.",
+  "engines": {
+    "node": ">=22.20.0"
+  },
   "scripts": {
-    "skills:list": "npx --yes skills@latest add . --list",
-    "validate:marketplace": "claude plugin validate .",
-    "validate:plugins": "for d in skills/*; do if [ -d \"$d/.claude-plugin\" ]; then claude plugin validate \"$d\"; fi; done",
-    "validate": "npm run skills:list && npm run validate:marketplace && npm run validate:plugins"
+    "skills:list": "npx --yes skills@1.5.22 add . --list",
+    "skills:list:plugin": "npx --yes skills@1.5.22 add ./plugins/ponytail-review-gate --list",
+    "validate:repo": "node scripts/validate-repo.mjs",
+    "validate:claude": "npx --yes @anthropic-ai/claude-code@2.1.228 plugin validate . && npx --yes @anthropic-ai/claude-code@2.1.228 plugin validate ./plugins/ponytail-review-gate",
+    "validate": "npm run validate:repo && npm run skills:list && npm run skills:list:plugin && npm run validate:claude"
   }
 }

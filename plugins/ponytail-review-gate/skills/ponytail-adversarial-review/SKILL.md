@@ -1,6 +1,6 @@
 ---
 name: ponytail-adversarial-review
-description: Use in a repo whenever Codex writes, edits, refactors, scaffolds, or reviews code. Requires an adversarial Ponytail review of the changed code before completion, a main-agent response to each corrective action, code updates for accepted findings, and verification before the final answer.
+description: Enforce an adversarial simplicity review before completing code changes, including a decision on every corrective action, accepted fixes, and verification. Use when repository instructions require a Ponytail completion gate or the user asks to challenge a diff for unnecessary complexity before finishing. Do not replace correctness or security review.
 ---
 
 # Ponytail Adversarial Review
@@ -15,7 +15,7 @@ Use the vendored Ponytail skills in this plugin:
 - Ponytail review: `../ponytail-review/SKILL.md`
 - Ponytail audit, optional whole-repo audit only, not the normal completion gate: `../ponytail-audit/SKILL.md`
 
-If those paths are missing, fall back to the installed `@ponytail` and `@ponytail-review` skills if available. If neither is available, perform the same review manually using Ponytail's ladder: YAGNI, stdlib, native platform features, installed dependency, one line, then minimum code.
+If those paths are missing, fall back to installed `$ponytail` and `$ponytail-review` skills if available. If neither is available, perform the same review manually using Ponytail's ladder: YAGNI, standard library, native platform features, installed dependency, one line, then minimum code.
 
 ## Workflow
 
@@ -42,7 +42,7 @@ If those paths are missing, fall back to the installed `@ponytail` and `@ponytai
 5. Update code before completion:
    - Apply every accepted corrective action.
    - If corrective changes modify code, repeat the review on the new diff until there are no accepted findings left.
-   - Do not final while an accepted finding remains unpatched.
+   - Do not finish while an accepted finding remains unpatched.
 
 6. Verify:
    - Run the smallest relevant checks for the touched area, such as `npm run lint`, unit tests, typecheck, or an Expo health check.
