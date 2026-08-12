@@ -1,6 +1,6 @@
 # Emlembow Skills
 
-Portable [Agent Skills](https://agentskills.io/) for Codex, Claude Code, and other compatible coding agents. The repository also publishes a full Ponytail Review Gate plugin for Codex and Claude Code.
+Portable [Agent Skills](https://agentskills.io/) for Codex, Claude Code, and other compatible coding agents.
 
 ## Install with `npx skills`
 
@@ -15,7 +15,7 @@ Install one skill into the current project:
 ```bash
 npx skills add Emlembow/skills --skill frontend-aesthetics
 npx skills add Emlembow/skills --skill skillopt-improve-skill
-npx skills add Emlembow/skills --skill ponytail-review-gate
+npx skills add Emlembow/skills --skill adversarial-review
 ```
 
 Project scope is the default and is usually the safest choice for team repositories. To install a reviewed skill for a specific agent at user scope, be explicit:
@@ -39,37 +39,11 @@ Designs distinctive, responsive web interfaces while preserving product context,
 
 Evaluates and improves an existing skill against a measurable objective using rollouts, bounded edits, and validation gates.
 
-### [Ponytail Review Gate](skills/ponytail-review-gate/)
+### [Adversarial Review](skills/adversarial-review/)
 
-Adds or runs a lean-code completion gate. The portable skill works on its own; the full plugin below adds the companion Ponytail modes and review skills.
+Requires a completed task result to survive two consecutive independent attempts to disprove it. The skill keeps immutable candidate versions and reviewer findings in a durable workspace ledger.
 
-The repository also exposes the plugin's five companion `SKILL.md` entries through `npx skills add Emlembow/skills --list`, so they can be installed individually without plugin-specific integration.
-
-## Full Ponytail plugin
-
-The plugin at [`plugins/ponytail-review-gate`](plugins/ponytail-review-gate/) bundles Ponytail mode, diff review, whole-repository audit, help, and the adversarial completion gate.
-
-### Codex
-
-```bash
-codex plugin marketplace add Emlembow/skills
-codex plugin add ponytail-review-gate@emlembow-skills
-```
-
-Start a new task after installation so Codex loads the plugin's skills.
-
-### Claude Code
-
-```bash
-claude plugin marketplace add Emlembow/skills
-claude plugin install ponytail-review-gate@emlembow-skills
-```
-
-To install only the plugin's five portable skills through the open `skills` CLI, without plugin-specific integration:
-
-```bash
-npx skills add https://github.com/Emlembow/skills/tree/main/plugins/ponytail-review-gate --skill '*' --agent codex
-```
+The skill is also published through [skills.sh](https://skills.sh/Emlembow/skills/adversarial-review). Skills hosted on GitHub appear there after an install through the `skills` CLI with anonymous telemetry enabled.
 
 ## Create or contribute a skill
 
@@ -91,7 +65,7 @@ The automated checks pin tool versions for reproducibility even though end-user 
 npm run validate
 ```
 
-This checks repository structure, skill metadata, portable discovery for both skill collections, and the Claude marketplace. Pull requests and pushes to `main` run the same validation in GitHub Actions.
+This checks repository structure, skill metadata, top-level portable discovery, and the Claude marketplace. Pull requests and pushes to `main` run the same validation in GitHub Actions.
 
 ## Sources
 

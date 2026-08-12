@@ -29,10 +29,7 @@ Record the prompts and outcomes in the pull request description rather than addi
 
 ## Plugin changes
 
-Keep plugin manifests, marketplace entries, and bundled skill paths in sync. The full Ponytail plugin must remain valid from both:
-
-- `.agents/plugins/marketplace.json` for Codex.
-- `.claude-plugin/marketplace.json` for Claude Code.
+Keep plugin manifests, marketplace entries, and bundled skill paths in sync. Remove marketplace entries when their local source is removed, and validate every remaining source from both `.agents/plugins/marketplace.json` and `.claude-plugin/marketplace.json`.
 
 Do not claim a capability that the target host does not load. Keep host-specific behavior inside the corresponding plugin surface, while leaving the top-level `skills/` collection portable.
 

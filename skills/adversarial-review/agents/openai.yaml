@@ -1,0 +1,4 @@
+interface:
+  display_name: "Adversarial Review"
+  short_description: "Require two independent adversarial passes"
+  default_prompt: "Use $adversarial-review to complete this task and require two independent adversarial reviewers before declaring it done."

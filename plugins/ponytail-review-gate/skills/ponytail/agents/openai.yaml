@@ -1,4 +1,0 @@
-interface:
-  display_name: "Ponytail"
-  short_description: "Choose the simplest solution that works"
-  default_prompt: "Use $ponytail to solve this task with the smallest sound implementation."

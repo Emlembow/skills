@@ -1,4 +1,0 @@
-interface:
-  display_name: "Ponytail Review Gate"
-  short_description: "Enforce a lean-code completion review gate"
-  default_prompt: "Use $ponytail-review-gate to add and run a lean-code completion gate in this repository."

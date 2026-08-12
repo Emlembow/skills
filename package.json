@@ -8,9 +8,8 @@
   },
   "scripts": {
     "skills:list": "npx --yes skills@1.5.22 add . --list",
-    "skills:list:plugin": "npx --yes skills@1.5.22 add ./plugins/ponytail-review-gate --list",
     "validate:repo": "node scripts/validate-repo.mjs",
-    "validate:claude": "npx --yes @anthropic-ai/claude-code@2.1.228 plugin validate . && npx --yes @anthropic-ai/claude-code@2.1.228 plugin validate ./plugins/ponytail-review-gate",
-    "validate": "npm run validate:repo && npm run skills:list && npm run skills:list:plugin && npm run validate:claude"
+    "validate:claude": "npx --yes @anthropic-ai/claude-code@2.1.228 plugin validate .",
+    "validate": "npm run validate:repo && npm run skills:list && npm run validate:claude"
   }
 }

@@ -136,11 +136,8 @@ async function validateJsonFile(file) {
 }
 
 const rootSkills = await childDirectories(path.join(repoRoot, "skills"));
-const pluginSkills = await childDirectories(
-  path.join(repoRoot, "plugins", "ponytail-review-gate", "skills"),
-);
 
-for (const skillDir of [...rootSkills, ...pluginSkills]) {
+for (const skillDir of rootSkills) {
   await validateSkill(skillDir);
 }
 
@@ -152,5 +149,5 @@ if (errors.length) {
   console.error(errors.map((error) => `- ${error}`).join("\n"));
   process.exitCode = 1;
 } else {
-  console.log(`Validated ${rootSkills.length + pluginSkills.length} skills and repository manifests.`);
+  console.log(`Validated ${rootSkills.length} skills and repository manifests.`);
 }
