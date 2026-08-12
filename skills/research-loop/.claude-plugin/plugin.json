@@ -1,0 +1,10 @@
+{
+  "name": "research-loop",
+  "description": "Runs guarded metric-driven experiments against a fixed evaluation harness with holdout gates, leakage checks, and recoverable Git history.",
+  "version": "1.0.1",
+  "author": {
+    "name": "Emlembow"
+  },
+  "repository": "https://github.com/Emlembow/skills",
+  "license": "MIT"
+}

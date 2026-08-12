@@ -19,6 +19,11 @@
       "name": "adversarial-review",
       "description": "Two independent adversarial approvals for a digest-checked task result.",
       "source": "./skills/adversarial-review"
+    },
+    {
+      "name": "research-loop",
+      "description": "Guarded metric-driven experiments with holdout and leakage checks.",
+      "source": "./skills/research-loop"
     }
   ]
 }
