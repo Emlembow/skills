@@ -1,6 +1,6 @@
 ---
 name: adversarial-review
-description: Run a file-audited completion loop that requires two consecutive fresh-context subagents to independently try to disprove the same immutable task result. Use when the user invokes $adversarial-review, asks for two independent adversarial approvals, or requires a result to survive repeated attempts to find correctness, completeness, requirement, or verification gaps before completion. Do not trigger for an ordinary one-pass review, and never self-certify when fresh subagents are unavailable.
+description: Run a file-audited completion loop that requires two consecutive fresh-context subagents to independently try to disprove the same versioned, digest-checked task result. Use when the user invokes $adversarial-review, asks for two independent adversarial approvals, or requires a result to survive repeated attempts to find correctness, completeness, requirement, or verification gaps before completion. Do not trigger for an ordinary one-pass review, and never self-certify when fresh subagents are unavailable.
 ---
 
 # Adversarial Review
@@ -44,19 +44,19 @@ Write `task.md` once with:
 
 Write `state.md` with the current version and digest, pass streak, isolation mode, reviewer identities already used, and a short chronological event log. Record `context-only` when the host cannot enforce a filesystem sandbox; do not present procedural isolation as OS-enforced isolation.
 
-## Freeze each candidate
+## Record each candidate snapshot
 
 Record the first completed result as `v0/`. Put the exact proposed answer or outcome in `result.md`. Copy every output file and the minimum supporting context needed to assess it into `artifacts/`; do not make mutable workspace paths the reviewer's only evidence. Include raw verification evidence when the result depends on checks the reviewer cannot safely repeat. Exclude credentials and unrelated private data.
 
 Generate `manifest.sha256` over `result.md` and every file in `artifacts/` with an available SHA-256 utility. Hash `manifest.sha256` itself and use that value as the candidate digest. Record the digest in `state.md`.
 
-Freeze the directory before review. Never edit a frozen `vN/`. If the result, evidence, or review packet must change, create `vN+1/`, reset the streak, and start again with two new reviewers. If the task or acceptance criteria change, start a new run with a new `task.md`. Rehash the candidate before and after every review; a mismatch invalidates the review.
+Treat the recorded `vN/` as read-only during its review. The files remain ordinary writable files; the digest only detects changes. If any recorded bytes change, invalidate every pass for that version, create `vN+1/`, reset the streak, and start again with two new reviewers. If the task or acceptance criteria change, start a new run with a new `task.md`. Rehash the candidate before and after every review; a mismatch invalidates the review.
 
 If the result cannot be represented in a self-contained packet, record the limitation and do not claim the gate passed.
 
 ## Isolate each reviewer
 
-For every review, create a new random temporary directory outside the ledger. Copy only `task.md` and the current frozen `vN/` into it. Do not include:
+For every review, create a new random temporary directory outside the ledger. Copy only `task.md` and the current recorded `vN/` snapshot into it. Do not include:
 
 - Earlier versions.
 - `state.md` or `complete.md`.
@@ -112,7 +112,7 @@ Do not accept a bare `DONE` without disproof attempts and evidence.
 
 ## Run the loop
 
-1. Complete the task and freeze `v0`; set the pass streak to `0`.
+1. Complete the task and record `v0`; set the pass streak to `0`.
 2. Launch fresh reviewer A for `vN` and validate its identity, candidate label, digest, evidence, and verdict.
 3. On A's valid `DONE`, archive `fNa.md`, rehash `vN`, and set the streak to `1`.
 4. On A's `FAIL` or any invalid review, archive its output when available, record an error file when it produced no valid findings, reset to `0`, and do not launch B.

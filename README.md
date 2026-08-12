@@ -41,7 +41,7 @@ Evaluates and improves an existing skill against a measurable objective using ro
 
 ### [Adversarial Review](skills/adversarial-review/)
 
-Requires a completed task result to survive two consecutive independent attempts to disprove it. The skill keeps immutable candidate versions and reviewer findings in a durable workspace ledger.
+Requires a completed task result to survive two consecutive independent attempts to disprove it. The skill keeps versioned, digest-checked candidate snapshots and reviewer findings in a durable workspace ledger.
 
 The skill is also published through [skills.sh](https://skills.sh/Emlembow/skills/adversarial-review). Skills hosted on GitHub appear there after an install through the `skills` CLI with anonymous telemetry enabled.
 

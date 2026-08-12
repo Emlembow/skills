@@ -1,7 +1,7 @@
 {
   "name": "adversarial-review",
   "description": "Requires a task result to survive two consecutive independent adversarial reviews before completion.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Emlembow"
   },
