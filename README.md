@@ -15,6 +15,7 @@ Install one skill into the current project:
 ```bash
 npx skills add Emlembow/skills --skill frontend-aesthetics
 npx skills add Emlembow/skills --skill skillopt-improve-skill
+npx skills add Emlembow/skills --skill research-loop
 npx skills add Emlembow/skills --skill adversarial-review
 ```
 
@@ -38,6 +39,10 @@ Designs distinctive, responsive web interfaces while preserving product context,
 ### [SkillOpt Improve Skill](skills/skillopt-improve-skill/)
 
 Evaluates and improves an existing skill against a measurable objective using rollouts, bounded edits, and validation gates.
+
+### [Research Loop](skills/research-loop/)
+
+Runs autonomous, metric-driven experiments on code, prompts, configuration, policies, or pipelines against a fixed evaluation harness. It uses sealed holdout gates and leakage checks to reject scenario-specific patches and other score-gaming shortcuts while generalizing Karpathy's [autoresearch](https://github.com/karpathy/autoresearch) beyond language-model training.
 
 ### [Adversarial Review](skills/adversarial-review/)
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Loop"
+  short_description: "Run guarded metric-driven experiments"
+  default_prompt: "Use $research-loop to improve this implementation against its evaluation harness without overfitting or score gaming."
