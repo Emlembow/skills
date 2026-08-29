@@ -12,7 +12,7 @@
     },
     {
       "name": "research-loop",
-      "description": "Guarded metric-driven experiments with holdout and leakage checks.",
+      "description": "Metric-driven experiments with holdouts, immutable evidence, and replay-safe recovery.",
       "source": "./skills/research-loop"
     }
   ]
