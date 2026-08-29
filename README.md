@@ -25,7 +25,7 @@ Project scope is the default and is usually the safest choice for a team reposit
 
 | Skill | Best for |
 | --- | --- |
-| [`research-loop`](skills/research-loop/) | Metric-driven implementation experiments protected by holdout and leakage checks |
+| [`research-loop`](skills/research-loop/) | Metric-driven experiments with holdouts, immutable evidence, and replay-safe recovery |
 | [`adversarial-review`](skills/adversarial-review/) | Two independent attempts to disprove a versioned, digest-checked result |
 
 `adversarial-review` is also indexed on [skills.sh](https://skills.sh/Emlembow/skills/adversarial-review). GitHub-hosted skills appear there after an install through the `skills` CLI with anonymous telemetry enabled.
