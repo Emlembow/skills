@@ -27,6 +27,7 @@ Project scope is the default and is usually the safest choice for a team reposit
 | --- | --- |
 | [`research-loop`](skills/research-loop/) | Metric-driven experiments with holdouts, immutable evidence, and replay-safe recovery |
 | [`adversarial-review`](skills/adversarial-review/) | Two independent attempts to disprove a versioned, digest-checked result |
+| [`divisible-work`](skills/divisible-work/) | Adaptive subagent coordination with durable task state, verification, and progress readouts |
 
 `adversarial-review` is also indexed on [skills.sh](https://skills.sh/Emlembow/skills/adversarial-review). GitHub-hosted skills appear there after an install through the `skills` CLI with anonymous telemetry enabled.
 
@@ -37,6 +38,7 @@ Every portable skill can be selected independently:
 ```bash
 npx skills add Emlembow/skills --skill research-loop
 npx skills add Emlembow/skills --skill adversarial-review
+npx skills add Emlembow/skills --skill divisible-work
 ```
 
 To install a reviewed skill for a specific agent at user scope, be explicit:
@@ -44,6 +46,8 @@ To install a reviewed skill for a specific agent at user scope, be explicit:
 ```bash
 npx skills add Emlembow/skills --skill research-loop --agent codex --global --yes
 npx skills add Emlembow/skills --skill research-loop --agent claude-code --global --yes
+npx skills add Emlembow/skills --skill divisible-work --agent codex --global --yes
+npx skills add Emlembow/skills --skill divisible-work --agent claude-code --global --yes
 ```
 
 The CLI recommends symlink installation. Use `--copy` only when the target environment cannot use symlinks. Update project-scoped skills with `npx skills update -p`, or user-scoped skills with `npx skills update -g`.
@@ -88,7 +92,7 @@ The automated checks pin tool versions for reproducibility even though end-user 
 npm run validate
 ```
 
-This checks repository structure, skill metadata, top-level portable discovery, and the Claude marketplace. Pull requests and pushes to `main` run the same validation in GitHub Actions.
+This checks repository structure, skill metadata, top-level portable discovery, discovery at every local plugin source registered in either marketplace, the Claude marketplace, and each distributed Claude plugin. Pull requests and pushes to `main` run the same validation in GitHub Actions.
 
 ## References
 

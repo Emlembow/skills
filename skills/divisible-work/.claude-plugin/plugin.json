@@ -1,0 +1,10 @@
+{
+  "name": "divisible-work",
+  "description": "Coordinates adaptive subagent work through durable task records, progress readouts, and verified completion.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Emlembow"
+  },
+  "repository": "https://github.com/Emlembow/skills",
+  "license": "MIT"
+}
