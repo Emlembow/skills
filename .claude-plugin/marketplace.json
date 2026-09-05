@@ -11,6 +11,11 @@
       "source": "./skills/adversarial-review"
     },
     {
+      "name": "divisible-work",
+      "description": "Adaptive subagent coordination with durable task state and verified completion.",
+      "source": "./skills/divisible-work"
+    },
+    {
       "name": "research-loop",
       "description": "Metric-driven experiments with holdouts, immutable evidence, and replay-safe recovery.",
       "source": "./skills/research-loop"

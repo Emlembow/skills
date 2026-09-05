@@ -10,6 +10,7 @@
     "skills:list": "npx --yes skills@1.5.22 add . --list",
     "validate:repo": "node scripts/validate-repo.mjs",
     "validate:claude": "npx --yes @anthropic-ai/claude-code@2.1.228 plugin validate .",
-    "validate": "npm run validate:repo && npm run skills:list && npm run validate:claude"
+    "validate:plugins": "node scripts/validate-plugins.mjs skills@1.5.22 @anthropic-ai/claude-code@2.1.228",
+    "validate": "npm run validate:repo && npm run skills:list && npm run validate:claude && npm run validate:plugins"
   }
 }
