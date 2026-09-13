@@ -1,4 +1,4 @@
 interface:
   display_name: "Divisible Work"
-  short_description: "Coordinate adaptive work through verified completion"
-  default_prompt: "Use $divisible-work to coordinate this task with subagents, durable task records, and steady progress updates through verified completion."
+  short_description: "Route subagent work through verified completion"
+  default_prompt: "Use $divisible-work to coordinate this task with model routing, durable task records, and progress updates through verified completion."

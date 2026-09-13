@@ -1,6 +1,6 @@
 ---
 name: divisible-work
-description: Coordinate complex tasks through verified completion using subagents, an adaptive dependency plan, durable task records, and steady progress readouts. Use when explicitly invoked as $divisible-work or when a complex user task warrants sustained planning, delegation, monitoring, and integration, including research, implementation, and existing task lists. Decide what can run in parallel and revise the path as results arrive. Do not trigger for simple requests, explanations of Divisible Load Theory, or worker assignments already being executed under this coordinator. Requires writable durable storage and usable subagent capabilities.
+description: Coordinate complex tasks through verified completion using subagents, task-based model routing where supported, an adaptive dependency plan, durable task records, and steady progress readouts. Use when explicitly invoked as $divisible-work or when a complex user task warrants sustained planning, delegation, monitoring, and integration, including research, implementation, and existing task lists. Decide what can run in parallel and revise the path as results arrive. Do not trigger for simple requests, explanations of Divisible Load Theory, or worker assignments already being executed under this coordinator. Requires writable durable storage and usable subagent capabilities.
 ---
 
 # Divisible Work
@@ -33,6 +33,8 @@ Use Divisible Load Theory as inspiration for allocating work, not as proof that 
 
 Choose the next action from the current evidence and dependency map. Do not impose a fixed sequence of batches or a preset number of planning, research, review, or synthesis stages.
 
+Before the first dispatch, read [model-routing.md](references/model-routing.md) and record the available model choices and applicable user constraints. Keep the parent model unchanged. Route clear, bounded execution to an efficient model and difficult reasoning, synthesis, integration, or warranted independent review to a stronger model. Select supported reasoning effort separately. When selection is unavailable, continue with host defaults and record that limitation; usable subagents remain required.
+
 For every assignment, persist dispatch intent and give the worker:
 
 - The task ID, attempt ID, bounded objective, and relevant user constraints.
@@ -42,7 +44,7 @@ For every assignment, persist dispatch intent and give the worker:
 - This role boundary: **Execute this assignment under the existing divisible-work coordinator. Do not invoke divisible-work, spawn further workers, or edit the shared task ledger or journal. Recommend subdivisions or follow-up tasks to the coordinator.**
 - A return contract: outcome, artifact locations, verification evidence, unresolved issues, and suggested follow-up work. Report blockers promptly; write only assigned outputs and authorized work products.
 
-Record the returned worker identity immediately. Workers may write attempt-specific artifacts, but only the coordinator changes shared task state.
+Persist the requested model, effort, selection reason, and context handoff with the attempt before launching it. Pass choices through supported host controls rather than relying on the assignment text to switch models. Record the returned worker identity immediately and distinguish requested settings from any settings confirmed by the host. Workers may write attempt-specific artifacts, but only the coordinator changes shared task state.
 
 Whenever a result, blocker, user correction, or status event arrives:
 
@@ -58,6 +60,7 @@ Keep substantive verification finite and proportional. A verifier may inspect a 
 ## Recover without losing work
 
 - Distinguish a failed attempt from an impossible task. Retry, split, reuse, or reassign when there is a credible new approach. Record what changed, why it could succeed, and what evidence will settle the attempt. Do not repeat an exhausted approach merely to remain active; there is no arbitrary retry count.
+- Reassess routing when evidence shows the assignment needs deeper reasoning. Record an escalation as a new attempt, carry forward useful artifacts, and reconcile the prior worker before launching conflicting work. A missing credential, unavailable tool, or occupied slot is not evidence that a stronger model will solve the problem.
 - Continue useful independent branches while a task is blocked. Leave dependent tasks pending until their required inputs are accepted. Ask for the precise missing input or action when necessary, without adding approval gates to already authorized work.
 - Before replacing or reassigning active work, reconcile its status and prevent conflicting execution. Treat an uncertain launch or unreachable worker as unresolved; do not assume it never started.
 - On resume, read the durable state, inspect actual worker status and retained outputs, and reconnect to known work before dispatching replacements. Recheck candidate results rather than inferring acceptance from file existence.

@@ -27,9 +27,11 @@ Project scope is the default and is usually the safest choice for a team reposit
 | --- | --- |
 | [`research-loop`](skills/research-loop/) | Metric-driven experiments with holdouts, immutable evidence, and replay-safe recovery |
 | [`adversarial-review`](skills/adversarial-review/) | Two independent attempts to disprove a versioned, digest-checked result |
-| [`divisible-work`](skills/divisible-work/) | Adaptive subagent coordination with durable task state, verification, and progress readouts |
+| [`divisible-work`](skills/divisible-work/) | Adaptive subagent coordination with model routing, durable task state, verification, and progress readouts |
 
 `adversarial-review` is also indexed on [skills.sh](https://skills.sh/Emlembow/skills/adversarial-review). GitHub-hosted skills appear there after an install through the `skills` CLI with anonymous telemetry enabled.
+
+`divisible-work` keeps the parent model selected by the user and routes assignments through the host's available model controls. In Codex, it defaults to Luna at `xhigh` reasoning for bounded execution and Astra for demanding reasoning or warranted independent review, when those models are available. User overrides take precedence; hosts without model selection retain their defaults. The skill records routing decisions and fallbacks without installing agent profiles or changing host configuration.
 
 ## Install exactly what you need
 

@@ -1,7 +1,7 @@
 {
   "name": "divisible-work",
-  "description": "Coordinates adaptive subagent work through durable task records, progress readouts, and verified completion.",
-  "version": "1.0.0",
+  "description": "Coordinates adaptive subagent work with model routing where supported, durable task records, and verified completion.",
+  "version": "1.1.0",
   "author": {
     "name": "Emlembow"
   },

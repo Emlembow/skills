@@ -12,7 +12,7 @@
     },
     {
       "name": "divisible-work",
-      "description": "Adaptive subagent coordination with durable task state and verified completion.",
+      "description": "Adaptive subagent coordination with model routing, durable task state, and verified completion.",
       "source": "./skills/divisible-work"
     },
     {

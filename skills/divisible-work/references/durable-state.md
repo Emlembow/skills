@@ -27,6 +27,7 @@ Keep a compact index and enough task detail to resume. Include:
 Goal: <requested outcome and deliverable destination>
 Acceptance: <observable criteria for the integrated result>
 Constraints: <scope, authorization, resource limits, relevant user choices>
+Routing: <available routine/reasoning models and efforts, user overrides, or host-default limitation>
 Goal revision: G1
 Run status: active | blocked | complete | cancelled
 Updated: <timestamp>
@@ -49,7 +50,7 @@ Acceptance criteria: <checks needed to accept this task>
 Inputs: <accepted prerequisites and their attempts/revisions; separately identify any candidate under review>
 Dispatch intent: <attempt ID, assignment identity, timestamp, reconciliation note>
 Attempts:
-- A01: <worker handle, started/finished timestamps, outcome, artifact references>
+- A01: <worker handle, started/finished timestamps, requested model/effort or host-default, selection reason, context handoff, host-confirmed settings or unknown, outcome, artifact references>
 Accepted evidence: <accepted attempt, output revision, verification result, timestamp>
 Blocker / next action: <actionable detail, or none>
 Replaces / replaced by: <task IDs and reason, if applicable>
@@ -68,6 +69,8 @@ Replaces / replaced by: <task IDs and reason, if applicable>
 ```
 
 Adapt presentation to task size; retain the information rather than mechanically copying unused fields. Keep detailed attempts under their task record, with a concise index. Stable task IDs describe obligations; attempt IDs distinguish executions. Include the task/attempt identity in every worker assignment so an interrupted launch can be found later.
+
+Record routing per attempt, including fallbacks and escalations, so a resumed coordinator does not infer a model from a role name. Keep requested settings separate from host-confirmed settings; a successful launch or worker self-report alone does not prove which model ran. Record `unknown` when confirmation is unavailable. For older records without routing fields, recover what the host exposes and leave the rest unknown. Recheck model availability before new dispatches after a resume; do not replace valid running workers solely because defaults changed.
 
 ## Status meanings
 
@@ -90,7 +93,7 @@ Use task records for known required integration and verification work even if th
 
 ## Journal and checkpointing
 
-Append concise timestamped entries containing task/attempt IDs, what happened, the evidence or reason, the resulting decision, and the next action. Record dispatches, accepted or rejected results, retries, blockers, changed dependencies or scope, resumed workers, ETA basis changes, and closure. Link artifacts instead of copying worker transcripts.
+Append concise timestamped entries containing task/attempt IDs, what happened, the evidence or reason, the resulting decision, and the next action. Record dispatches, model choices and routing changes, accepted or rejected results, retries, blockers, changed dependencies or scope, resumed workers, ETA basis changes, and closure. Link artifacts instead of copying worker transcripts.
 
 Before a launch, persist an identifiable dispatch intent in the ledger and journal. After the launch, promptly record the returned handle. After other meaningful events, update the authoritative ledger and append the journal entry. Use atomic file replacement for ledger updates where supported. If a write fails, recover durable recording before dispatching more work.
 
