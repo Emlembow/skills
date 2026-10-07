@@ -27,7 +27,8 @@ Keep a compact index and enough task detail to resume. Include:
 Goal: <requested outcome and deliverable destination>
 Acceptance: <observable criteria for the integrated result>
 Constraints: <scope, authorization, resource limits, relevant user choices>
-Routing: <available routine/reasoning models and efforts, user overrides, or host-default limitation>
+Delegation: <preferred surface, current project/host, human authorization for chat creation and follow-up messaging, or fallback reason>
+Routing: <allowlist gpt-6.1-sol and gpt-6-luna; available supported efforts; human model/effort-selection authorization; routing limitations>
 Goal revision: G1
 Run status: active | blocked | complete | cancelled
 Updated: <timestamp>
@@ -50,7 +51,14 @@ Acceptance criteria: <checks needed to accept this task>
 Inputs: <accepted prerequisites and their attempts/revisions; separately identify any candidate under review>
 Dispatch intent: <attempt ID, assignment identity, timestamp, reconciliation note>
 Attempts:
-- A01: <worker handle, started/finished timestamps, requested model/effort or host-default, selection reason, context handoff, host-confirmed settings or unknown, outcome, artifact references>
+- A01:
+  - Delegation: codex-thread | subagent
+  - Identity: <projectId and hostId when applicable; threadId for a ready Codex chat or native subagent handle>
+  - Pending creation: <clientThreadId when returned before a chat is ready, or none>
+  - Wait cursor: <latest cursor returned by wait_threads for this chat, or none>
+  - Selected model / effort: <gpt-6.1-sol or gpt-6-luna> / <supported effort>
+  - Execution: <started/finished timestamps, selection reason, context handoff, host-confirmed settings or unknown>
+  - Result: <outcome, artifact references, unresolved child work if any>
 Accepted evidence: <accepted attempt, output revision, verification result, timestamp>
 Blocker / next action: <actionable detail, or none>
 Replaces / replaced by: <task IDs and reason, if applicable>
@@ -68,9 +76,13 @@ Replaces / replaced by: <task IDs and reason, if applicable>
 <Leave pending until the integrated outcome is verified; then link evidence and deliverables.>
 ```
 
-Adapt presentation to task size; retain the information rather than mechanically copying unused fields. Keep detailed attempts under their task record, with a concise index. Stable task IDs describe obligations; attempt IDs distinguish executions. Include the task/attempt identity in every worker assignment so an interrupted launch can be found later.
+Adapt presentation to task size; retain the information rather than mechanically copying unused fields. Keep detailed attempts under their task record, with a concise index. Stable task IDs describe obligations; attempt IDs distinguish executions. Include the run/task/attempt identity in every worker assignment so an interrupted launch can be found later. A reused chat retains its chat identity but gets a separate attempt record for each assignment.
 
-Record routing per attempt, including fallbacks and escalations, so a resumed coordinator does not infer a model from a role name. Keep requested settings separate from host-confirmed settings; a successful launch or worker self-report alone does not prove which model ran. Record `unknown` when confirmation is unavailable. For older records without routing fields, recover what the host exposes and leave the rest unknown. Recheck model availability before new dispatches after a resume; do not replace valid running workers solely because defaults changed.
+For a Codex chat, record the project ID resolved through `list_projects` and the returned host/chat identity. Record the creation and messaging authorization from human instructions separately from worker requests. A pending `clientThreadId` is not a usable `threadId`; do not pass it to reading, messaging, or waiting tools. Keep the launch unresolved until the host confirms the ready identity. Carry each chat's returned wait cursor into the next `wait_threads` call as `afterCursor`; retain cursors across resumes to avoid redisplaying already collected results.
+
+Older subagent records remain readable. Recover missing delegation and identity fields from host evidence when possible; leave unknown values explicit rather than interpreting every old worker handle as a chat ID. Do not replace valid workers merely to adopt the new record shape. Before continuing an older worker, reconcile its settings with the current two-model allowlist and selected effort; retain prior artifacts even if that route now needs a permitted change or replacement.
+
+Record the allowed model and chosen supported effort per attempt, including fallback surfaces and escalations, so a resumed coordinator does not infer settings from a role name. Keep explicit requested settings separate from host-confirmed settings; a successful launch or worker self-report alone does not prove which model ran. Record confirmation as `unknown` when unavailable, but do not use unchecked inherited/default settings as a new route. For older records without routing fields, recover what the host exposes and leave the rest unknown. Recheck model availability and authorization before dispatches or continuations after a resume; changing defaults alone does not invalidate a known allowed route.
 
 ## Status meanings
 
@@ -89,17 +101,19 @@ For verification, record the candidate task/attempt/revision separately from acc
 
 Store each dependency's accepted attempt or output revision in the consuming assignment. When replacing T001 with T004 and T005, redirect affected dependencies to the replacements and explain how they cover the original obligation. If an old attempt later returns, retain its artifacts but do not accept it as the current result without revalidation. Prevent replaced workers from continuing conflicting edits.
 
-Use task records for known required integration and verification work even if their specifications are provisional. Provisional tasks remain pending and cannot dispatch until adequately specified. Use aggregate milestones only for grouping; never count both a group and its member tasks. Adding, splitting, superseding, or reopening tasks can change the progress denominator or numerator; state that openly.
+Use task records for known required integration and verification work even if their specifications are provisional. Provisional tasks remain pending and cannot dispatch until adequately specified. Use aggregate milestones only for grouping; never count both a group and its member tasks. Count each coordinator-assigned obligation once; a worker chat's own subagents and retries do not add progress records or complete the parent assignment independently. The worker remains responsible for their integrated output and evidence. Adding, splitting, superseding, or reopening coordinator tasks can change the progress denominator or numerator; state that openly.
 
 ## Journal and checkpointing
 
 Append concise timestamped entries containing task/attempt IDs, what happened, the evidence or reason, the resulting decision, and the next action. Record dispatches, model choices and routing changes, accepted or rejected results, retries, blockers, changed dependencies or scope, resumed workers, ETA basis changes, and closure. Link artifacts instead of copying worker transcripts.
 
-Before a launch, persist an identifiable dispatch intent in the ledger and journal. After the launch, promptly record the returned handle. After other meaningful events, update the authoritative ledger and append the journal entry. Use atomic file replacement for ledger updates where supported. If a write fails, recover durable recording before dispatching more work.
+Before a launch, persist an identifiable dispatch intent, delegation surface, ownership, and applicable authorization in the ledger and journal. After the launch, promptly record the returned ready identity or pending creation identity. After other meaningful events, update the authoritative ledger and append the journal entry. Use atomic file replacement for ledger updates where supported. If a write fails, recover durable recording before dispatching more work.
 
 The two Markdown files are not a transactional database. If interrupted between writes, reconcile actual workers and artifacts with the authoritative ledger, append a recovery note for any history gap, and checkpoint the corrected state. Do not silently infer a successful launch, failed launch, or accepted output from an incomplete entry.
 
-Before repeating an uncertain launch, search the available worker inventory or history for its task/attempt identity. If its existence or write activity cannot be established, hold conflicting work and record the uncertainty. Resume independent work when safe. A worker's absence from a limited status listing is not proof that it never ran.
+Before repeating an uncertain launch, search the available worker inventory or history for its run/task/attempt identity. For Codex chats, inspect `list_threads` and use `read_thread` for plausible matches; reconcile pending setup through the host's supported status controls when available. For native subagents, use their inventory and status controls. If existence or write activity cannot be established, hold conflicting work and record the uncertainty. Resume independent work when safe. A worker's absence from a limited status listing is not proof that it never ran.
+
+Same-project local chats share a checkout. Ownership applies to the worker and all of its subagents: they may edit only the assignment's files/resources, and must not write the shared ledger or journal. Before reassignment, confirm that the prior worker and its child work have stopped conflicting writes. Record any explicitly requested worktree and integration boundary with the attempt; never infer isolation merely from a separate chat identity.
 
 ## Worked paths
 

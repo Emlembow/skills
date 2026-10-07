@@ -12,7 +12,7 @@
     },
     {
       "name": "divisible-work",
-      "description": "Adaptive subagent coordination with model routing, durable task state, and verified completion.",
+      "description": "Verified GPT-6.1 Sol or GPT-6 Luna work, preferring permitted Codex chats with native subagent fallback and durable task state.",
       "source": "./skills/divisible-work"
     },
     {

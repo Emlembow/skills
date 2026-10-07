@@ -27,11 +27,21 @@ Project scope is the default and is usually the safest choice for a team reposit
 | --- | --- |
 | [`research-loop`](skills/research-loop/) | Metric-driven experiments with holdouts, immutable evidence, and replay-safe recovery |
 | [`adversarial-review`](skills/adversarial-review/) | Two independent attempts to disprove a versioned, digest-checked result |
-| [`divisible-work`](skills/divisible-work/) | Adaptive subagent coordination with model routing, durable task state, verification, and progress readouts |
+| [`divisible-work`](skills/divisible-work/) | Same-project Codex chat coordination with native subagent fallback, durable state, verification, and progress readouts |
 
 `adversarial-review` is also indexed on [skills.sh](https://skills.sh/Emlembow/skills/adversarial-review). GitHub-hosted skills appear there after an install through the `skills` CLI with anonymous telemetry enabled.
 
-`divisible-work` keeps the parent model selected by the user and routes assignments through the host's available model controls. In Codex, it defaults to Luna at `xhigh` reasoning for bounded execution and Astra for demanding reasoning or warranted independent review, when those models are available. User overrides take precedence; hosts without model selection retain their defaults. The skill records routing decisions and fallbacks without installing agent profiles or changing host configuration.
+`divisible-work` keeps the main chat focused on coordination and prefers new worker Codex chats in the same project when host rules and human authorization permit. Worker chats execute their assignments and use their own native subagents when useful; only the main chat updates the shared task ledger and accepts results. Native subagents provide the fallback on other hosts or where chat delegation is unavailable or prohibited. Installing the Claude plugin does not provide Codex chat tools.
+
+The skill preserves the parent model and routes workers only to GPT-6.1 Sol (`gpt-6.1-sol`) or GPT-6 Luna (`gpt-6-luna`). The main chat chooses a model and a supported thinking level for each assignment, usually Luna for clear bounded work and Sol for demanding reasoning, synthesis, or integration. There is no fixed thinking level. Worker subagents follow the same model restriction. The skill passes model and thinking choices at startup through permitted host controls and records them; an unavailable permitted route cannot fall back to a third model or unknown defaults.
+
+To explicitly request worker chat creation and follow-up messaging in Codex:
+
+```text
+Use $divisible-work to create worker Codex chats in this project, send follow-up assignments, and choose GPT-6.1 Sol or GPT-6 Luna plus a thinking level for each. Workers should use their own subagents when useful; use native subagents as the fallback.
+```
+
+Automatic skill selection alone does not authorize creating or messaging chats or overriding their model. The example explicitly requests chat creation, follow-up messaging, and model selection. The skill follows the host's permission rules and uses the native subagent fallback where those rules require it and an allowed model is available.
 
 ## Install exactly what you need
 
